@@ -32,7 +32,7 @@ set incsearch    " Incremental search
 set backspace=indent,eol,start " Backspace through anything while in insert mode
 set display=lastline " Show as much of a line as possible even if no room.
 set cursorline   " Highlight current line
-set title        " Automatically set title
+"set title        " Automatically set title
 set scrolloff=5  " Attempt to keep 5 lines of context when scrolling
 " set formatoptions=rq " Automatically insert comment leader on return
 set whichwrap+=<,>,[,] " Wrap start to end when using cursor keys
@@ -46,7 +46,7 @@ set ignorecase
 set smartcase
 
 " Enable the mouse
-set mouse=a
+"set mouse=a
 
 " Line numbers
 set number
