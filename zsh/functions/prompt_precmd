@@ -15,8 +15,41 @@ fi
 
 PR_GIT=`parse_git_branch`
 if [[ -n "$PR_GIT" ]]; then
-  bare_prompt="${bare_prompt}-[${PR_GIT}]"
-  PR_GIT="${PR_LIGHT_BLACK}${PR_SHIFT_IN}${PR_HBAR}${PR_SHIFT_OUT}[${PR_GREEN}${PR_GIT}${PR_LIGHT_BLACK}]${PR_NO_COLOR}"
+  local GIT_STATUS=""
+  __add_status() {
+    eval "GIT_STATUS=\"$GIT_STATUS$1\""
+  }
+  
+  local git_status=`git status --porcelain`
+
+  local num_staged=`echo $git_status    | grep "^\w."  | wc -l`
+  local num_deleted=`echo $git_status   | grep "^.D"   | wc -l`
+  local num_changed=`echo $git_status   | grep "^.\w"  | wc -l`
+  local num_conflicts=`echo $git_status | grep "^U."   | wc -l`
+  local num_untracked=`echo $git_status | grep "^??"   | wc -l`
+  
+  [[ num_staged    -ne 0 ]] && __add_status "✚${num_staged}"
+  [[ num_changed   -ne 0 ]] && __add_status "Δ${num_changed}"
+  [[ num_deleted   -ne 0 ]] && __add_status "✖${num_deleted}"
+  [[ num_conflicts -ne 0 ]] && __add_status "!${num_conflicts}"
+  [[ num_untracked -ne 0 ]] && __add_status "…${num_untracked}"
+  [[ -z $GIT_STATUS ]] && GIT_STATUS="✔"
+  
+  local ahead=`git to-push | wc -l`
+  GIT_AHEAD=`[[ $ahead -ne 0 ]] && echo "↑${ahead}"`
+      
+  bare_prompt="${bare_prompt}-[${PR_GIT}${GIT_AHEAD}|${GIT_STATUS}]"
+  
+  #reset git_status
+  GIT_STATUS=""
+  [[ num_staged    -ne 0 ]] && __add_status "${PR_LIGHT_GREEN}✚${num_staged}"
+  [[ num_changed   -ne 0 ]] && __add_status "${PR_LIGHT_YELLOW}Δ${num_changed}"
+  [[ num_deleted   -ne 0 ]] && __add_status "${PR_LIGHT_RED}✖${num_deleted}"
+  [[ num_conflicts -ne 0 ]] && __add_status "${PR_RED}!${num_conflicts}"
+  [[ num_untracked -ne 0 ]] && __add_status "${PR_NO_COLOR}…${num_untracked}"
+  [[ -z $GIT_STATUS ]] && GIT_STATUS="${PR_GREEN}✔"
+  
+  PR_GIT="${PR_LIGHT_BLACK}${PR_SHIFT_IN}${PR_HBAR}${PR_SHIFT_OUT}[${PR_GREEN}${PR_GIT}${GIT_AHEAD}|${GIT_STATUS}${PR_LIGHT_BLACK}]${PR_NO_COLOR}"
 fi
 
 PR_EMAIL=''
@@ -34,3 +67,4 @@ PR_FILLBAR="\${(l.(($TERMWIDTH - $promptsize))..${PR_HBAR}.)}"
 if [[ "$USER" == "root" ]]; then
   PR_USER_COLOR="${PR_RED}"
 fi
+
