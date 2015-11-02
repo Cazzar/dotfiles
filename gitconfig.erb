@@ -24,7 +24,7 @@
   in-develop = log master..develop --pretty='format:%s' --no-merges
   deploy = push origin HEAD:develop
   log-branch = log --no-merges --first-parent
-  to-commit = !git log `command git branch -a 2> /dev/null | grep \"^* \" | sed -e \"s/^\\* //\"` --branches --not --remotes --decorate --oneline
+  to-push = !git log `command git branch -a 2> /dev/null | grep \"^* \" | sed -e \"s/^\\* //\"` --branches --not --remotes --decorate --oneline
 [push]
 	default = upstream
 [rebase]
