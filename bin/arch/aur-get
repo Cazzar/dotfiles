@@ -31,7 +31,7 @@ Dir.chdir(ENV['HOME'] + '/build');
 
 package = ARGV[0]
 if File.directory? package
-  exit -1 if (ask(":: #{package} currently exists... do you want to delete it? [Y/n]: ") { |s| s.in = ['', 'y', 'n']}) == 'n' 
+  exit -1 if (ask(":: #{package} currently exists... do you want to delete it? [Y/n] ") { |s| s.in = ['', 'y', 'n']}) == 'n' 
 
   puts ":: Deleting old version of #{package}."
   rm_rf package
@@ -40,16 +40,20 @@ puts ':: Fetching updated version.'
 run 'get', '-z', "https://aur4.archlinux.org/cgit/aur.git/snapshot/#{package}.tar.gz"
 
 Dir.chdir package do
+  install = ask(":: Install #{package} as well (will install needed dependencides)? [Y/n] ") { |s| s.in = ['', 'y', 'n']}
   puts ':: Making package.'
+  
+  if install == 'n'
+    run 'makepkg' 
+  else
+    run 'makepkg', '-s'
+  end
 
-  run 'makepkg'
-
-  install = ask(":: Install #{package}? [Y/n] ") { |s| s.in = ['', 'y', 'n']}
   if install != 'n'
     run 'sudo', 'pacman', '-U', '--noconfirm', *Dir['*.pkg.tar.xz']
   end
-
-
-  puts ':: Stashing packages in pkg/.'
-  mv Dir["#{package}/*.pkg.tar.xz"], 'pkg/'
 end
+
+Dir.mkdir('pkg/') if !File.directory?('pkg/')
+puts ':: Stashing packages in ~/build/pkg/.'
+mv Dir["#{package}/*.pkg.tar.xz"], 'pkg/'
