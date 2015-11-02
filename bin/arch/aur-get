@@ -20,8 +20,25 @@ if ARGV.length == 0
   exec ENV['BROWSER'], 'https://aur4.archlinux.org/packages'
 end
 
+## Change into /build for, creating if needed.
+if !File.directory?(ENV['HOME'] + '/build')
+  puts ':: AUR build directoryy doesn\'t exist... creating'
+  Dir.mkdir(ENV['HOME'] + '/build')
+end
+
+Dir.chdir(ENV['HOME'] + '/build');
+
+
 package = ARGV[0]
 if File.directory? package
+  result = 'y'
+  loop do
+    print ":: #{package} currently exists... do you want to delete it? (Y/N): "
+    result = gets.downcase
+    exit -1 if (result == 'n' or result == 'no')
+    break if (result != 'y' and result != 'yes')
+  end
+ 
   puts ":: Deleting old version of #{package}."
   rm_rf package
 end
