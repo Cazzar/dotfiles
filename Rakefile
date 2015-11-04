@@ -59,20 +59,25 @@ def get_filename(file)
 end
 
 def replace_file(file)
-  system %Q{rm -rf "$HOME/.#{get_filename(file)}"}
+  #system %Q{rm -rf "$HOME/.#{get_filename(file)}"}
   link_file(file)
 end
 
 def link_file(file)
   if file =~ /\.erb$/
     puts "generating ~/.#{get_filename(file)}"
+    #Parse this before opening any files, so we can grab more information first.
+    content = ERB.new(File.read(file), nil, '<>').result(binding)
     File.open(File.join(ENV['HOME'], ".#{get_filename(file)}"), 'w') do |new_file|
-      new_file.write ERB.new(File.read(file), nil, '<>').result(binding)
+      new_file.write content
     end
+    #puts ERB.new(File.read(file), nil, '<>').result(binding)
   elsif file =~ /\.example$/
+    system %Q{rm -rf "$HOME/.#{get_filename(file)}"} if File.exist?(File.join(ENV['HOME'], ".#{filename}"))
     puts "copying ~/.#{get_filename(file)}"
     sh %Q{cp "$PWD/#{file}" "$HOME/.#{get_filename(file)}"}
   else
+    system %Q{rm -rf "$HOME/.#{get_filename(file)}"} if File.exist?(File.join(ENV['HOME'], ".#{filename}"))
     puts "linking ~/.#{file}"
     sh %Q{ln -s "$PWD/#{file}" "$HOME/.#{file}"}
   end
