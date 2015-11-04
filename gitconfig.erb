@@ -1,5 +1,4 @@
 <%
-  
   if File.exist?("#{ENV['HOME']}/.gitconfig")
     username = `git config --global --get user.name`.chomp
     email = `git config --global --get user.email`.chomp
