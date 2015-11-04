@@ -1,7 +1,9 @@
 <%
   if File.exist?("#{ENV['HOME']}/.gitconfig")
     username = `git config --global --get user.name`.chomp
+    puts "Using old user.name: #{username}"
     email = `git config --global --get user.email`.chomp
+    puts "Using old user.email: #{email}"
   else 
     username = print("Your Name: "); STDOUT.flush; STDIN.gets.chomp
 	  email = print("Your Email: "); STDOUT.flush; STDIN.gets.chomp
@@ -9,8 +11,8 @@
 %>
 
 [user]
-	name = <%=email %>
-	email = <%=username %>
+	name = <%=username %>
+	email = <%=email %>
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
