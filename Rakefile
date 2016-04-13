@@ -73,11 +73,11 @@ def link_file(file)
     end
     #puts ERB.new(File.read(file), nil, '<>').result(binding)
   elsif file =~ /\.example$/
-    system %Q{rm -rf "$HOME/.#{get_filename(file)}"} if File.exist?(File.join(ENV['HOME'], ".#{filename}"))
+    system %Q{rm -rf "$HOME/.#{get_filename(file)}"} if File.exist?(File.join(ENV['HOME'], ".#{get_filename(file)}"))
     puts "copying ~/.#{get_filename(file)}"
     sh %Q{cp "$PWD/#{file}" "$HOME/.#{get_filename(file)}"}
   else
-    system %Q{rm -rf "$HOME/.#{get_filename(file)}"} if File.exist?(File.join(ENV['HOME'], ".#{filename}"))
+    system %Q{rm -rf "$HOME/.#{get_filename(file)}"} if File.exist?(File.join(ENV['HOME'], ".#{get_filename(file)}"))
     puts "linking ~/.#{file}"
     sh %Q{ln -s "$PWD/#{file}" "$HOME/.#{file}"}
   end
