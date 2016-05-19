@@ -36,10 +36,15 @@ set cursorline   " Highlight current line
 set scrolloff=5  " Attempt to keep 5 lines of context when scrolling
 " set formatoptions=rq " Automatically insert comment leader on return
 set whichwrap+=<,>,[,] " Wrap start to end when using cursor keys
+set relativenumber " Use relative numbering.
+set showtabline=2
 
-" Setup skins
-set background=dark
-colorscheme elflord
+set nowrap
+set laststatus=2  " Always show status line.
+set lazyredraw " Don't redraw screen when running macros.
+
+" Highlight the status line
+highlight StatusLine ctermfg=blue ctermbg=yellow
 
 " Case insensitive by default, unless there are caps
 set ignorecase
@@ -63,19 +68,19 @@ noremap! <M-Down> <Down>
 noremap <M-Up> k
 noremap <M-Down> j
 
-" Vundle hinting?
-filetype off
+filetype off " Required by Vundle.
 
-" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
 Bundle 'vim-ruby/vim-ruby'
+
+"Plugin 'Valloric/YouCompleteMe' "Don't use this for now
+Plugin 'ervandew/supertab'
+Plugin 'nanotech/jellybeans.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -84,3 +89,58 @@ filetype plugin indent on    " required
 
 " VimRuby
 autocmd FileType ruby compiler ruby
+
+" Setup skins
+set background=dark
+"colorscheme elflord
+colorscheme jellybeans
+
+
+" Have I mentioned this is common for me?
+
+command! Q q " Bind :Q to :q
+command! Qall qall
+command! QA qall
+command! E e
+command! W w
+command! Wq wq
+
+"nnoremap <C-Up> g
+"nnoremap <C-Down> gt
+nnoremap <C-Left> gT
+nnoremap <C-Right> gt
+
+set wildmenu
+set wildmode=list:full
+
+" By default, vim thinks .md is Modula-2.
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" Without this, vim breaks in the middle of words when wrapping
+autocmd FileType markdown setlocal nolist wrap lbr
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin indent on
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+    au!
+
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    autocmd BufReadPost *
+          \ if line("'\"") > 0 && line("'\"") <= line("$") |
+          \   exe "normal g`\"" |
+          \ endif
+
+  augroup END
+
+endif " has("autocmd")
+

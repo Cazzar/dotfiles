@@ -52,6 +52,8 @@ task :install => [:git] do
       link_file(file)
     end
   end
+
+  system "vim +PluginInstall +qall"
 end
 
 def get_filename(file)
