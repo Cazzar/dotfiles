@@ -76,10 +76,15 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Bundle 'vim-ruby/vim-ruby'
-
 "Plugin 'Valloric/YouCompleteMe' "Don't use this for now
 Plugin 'ervandew/supertab'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'tpope/vim-bundler'
+Plugin 'mattn/emmet-vim' "EMMET!
+
+" UI
 Plugin 'nanotech/jellybeans.vim'
 
 " All of your Plugins must be added before the following line
