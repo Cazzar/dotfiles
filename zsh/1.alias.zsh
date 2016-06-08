@@ -15,3 +15,4 @@ alias sum="awk '{ s += \$1; } END { print s}'"
 
 alias which='type -a'
 alias manthat='man $(fc -ln -1 | awk -F" " "{print \$1}")'
+alias dirs='dirs -v'
