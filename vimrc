@@ -1,3 +1,5 @@
+let g:powerline_pycmd="py3"
+
 " Disable vi emulation
 set nocompatible
 
@@ -86,6 +88,7 @@ Plugin 'mattn/emmet-vim' "EMMET!
 
 " UI
 Plugin 'nanotech/jellybeans.vim'
+Plugin 'powerline/powerline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
