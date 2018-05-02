@@ -44,6 +44,8 @@ fi
 [[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"   beginning-of-history
 [[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}" end-of-history
 
+bindkey '^R' history-incremental-search-backward
+
 # Alt-Right
 bindkey "^[[1;3C" forward-word
 bindkey "^[^[[1;3C" forward-word
