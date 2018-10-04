@@ -54,6 +54,7 @@ task :install => [:git] do
   end
 
   system "vim +PluginInstall +qall"
+  system "touch ~/.tmux.local.conf"
 end
 
 def get_filename(file)
