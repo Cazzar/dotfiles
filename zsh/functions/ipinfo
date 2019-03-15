@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+local yellow=$terminfo[bold]$fg[yellow]
+local reset=$terminfo[sgr0]
+
+echo "$yellow  IP Information for ${1:?You must specify an IP to get information for.}$reset"
+echo "$yellow  Whois:$rest"
+whois "$1"
+
+echo "$yellow  rDNS:$reset"
+dig -x "$1" +short 
+

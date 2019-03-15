@@ -27,3 +27,4 @@ atlassian-ide-plugin.xml
 .versions.conf
 .kateproject
 .kateproject.d
+*.*proj.DotSettings

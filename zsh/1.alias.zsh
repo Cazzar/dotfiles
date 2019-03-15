@@ -16,13 +16,12 @@ alias sum="awk '{ s += \$1; } END { print s}'"
 alias which='type -a'
 alias manthat='man $(fc -ln -1 | awk -F" " "{print \$1}")'
 alias dirs='dirs -v'
-alias wolkanade='wol BC:5F:F4:47:3D:44'
 
-alias dc='docker-compose -f /var/docker/docker-compose.yml'
-alias mysqldump='docker exec mariadb mysqldump'
 alias rmempty='find . -type d -empty -delete'
 
 alias svim='sudo -E $EDITOR'
 alias svi='sudo -E $EDITOR'
 
 alias systemctl='sudo systemctl'
+
+alias used='df -h | grep -v "loop\|tmpfs\|dev \|run"'
