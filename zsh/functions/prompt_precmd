@@ -24,11 +24,11 @@ if [[ -n "$PR_GIT" ]]; then
   
   local git_status=`git status --porcelain`
 
-  local num_staged=`echo $git_status    | grep "^\w."  | wc -l`
-  local num_deleted=`echo $git_status   | grep "^.D"   | wc -l`
-  local num_changed=`echo $git_status   | grep "^.\w"  | wc -l`
-  local num_conflicts=`echo $git_status | grep "^U."   | wc -l`
-  local num_untracked=`echo $git_status | grep "^??"   | wc -l`
+  local num_staged=`echo $git_status    | grep "^\w."  | wc -l | xargs`
+  local num_deleted=`echo $git_status   | grep "^.D"   | wc -l | xargs`
+  local num_changed=`echo $git_status   | grep "^.\w"  | wc -l | xargs`
+  local num_conflicts=`echo $git_status | grep "^U."   | wc -l | xargs`
+  local num_untracked=`echo $git_status | grep "^??"   | wc -l | xargs`
   
   [[ num_staged    -ne 0 ]] && __add_status ${PR_LIGHT_GREEN}  "✚${num_staged}"
   [[ num_changed   -ne 0 ]] && __add_status ${PR_LIGHT_YELLOW} "Δ${num_changed}"
@@ -37,7 +37,7 @@ if [[ -n "$PR_GIT" ]]; then
   [[ num_untracked -ne 0 ]] && __add_status ${PR_NO_COLOR}     "…${num_untracked}"
   [[ -z $GIT_STATUS ]]      && __add_status ${PR_GREEN}        "✔"
   
-  local ahead=`git to-push | wc -l`
+  local ahead=`git to-push | wc -l | xargs`
   GIT_AHEAD=`[[ $ahead -ne 0 ]] && echo "↑${ahead}"`
       
   bare_prompt="${bare_prompt}-[${PR_GIT}${GIT_AHEAD}|${GIT_STATUS_BARE}]"

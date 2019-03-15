@@ -23,3 +23,7 @@ unsetopt NULL_GLOB
 unsetopt ALL_EXPORT
 
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+[[ -s "$HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source "$HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" 
