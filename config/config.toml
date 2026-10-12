@@ -8,6 +8,9 @@
 show_all_files = true
 show_pathbar = true
 
+[bootstrap.services.mise-history]
+builtin = "history-watch"
+
 [bootstrap.repos]
 "~/.dotfiles/nvim" = { url = "git@github.com:Cazzar/nvim.git" }
 
