@@ -5,6 +5,9 @@
 "brew:neovim" = "latest"
 "brew:zplug" = "latest"
 "brew:zoxide" = "latest"
+"brew:tree-sitter" = "latest"
+"brew:ripgrep" = "latest"
+"brew:fd" = "latest"
 
 [bootstrap.macos.finder]
 show_all_files = true
