@@ -26,3 +26,6 @@ builtin = "history-watch"
 "~/.ssh/config" = { source = "ssh/config", mode = "copy" }
 "~/.zshrc" = { mode = "symlink" }
 
+[tools]
+node = "lts"
+
