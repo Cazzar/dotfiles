@@ -3,6 +3,7 @@
 
 [bootstrap.packages]
 "brew:neovim" = "latest"
+"brew:zplug" = "latest"
 
 [bootstrap.macos.finder]
 show_all_files = true
