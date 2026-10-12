@@ -19,6 +19,7 @@ builtin = "history-watch"
 [dotfiles]
 "~/.config/mise/config.toml" = { mode = "track" }
 "~/.config/nvim" = { mode = "symlink" }
+"~/.p10k.zsh" = { mode = "track" }
 "~/.ssh/config" = { source = "ssh/config", mode = "copy" }
 "~/.zshrc" = { mode = "symlink" }
 

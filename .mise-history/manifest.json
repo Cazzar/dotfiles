@@ -14,6 +14,12 @@
       "variants": []
     },
     {
+      "path": "home/.p10k.zsh",
+      "autosave": true,
+      "encrypt": false,
+      "variants": []
+    },
+    {
       "path": "home/.ssh/config",
       "autosave": true,
       "encrypt": false,
