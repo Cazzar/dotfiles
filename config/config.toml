@@ -30,4 +30,5 @@ builtin = "history-watch"
 go = "latest"
 node = "lts"
 npm = "latest"
+rust = "latest"
 
