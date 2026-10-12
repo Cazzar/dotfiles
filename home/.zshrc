@@ -43,7 +43,7 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
-eval "$(zoxide init --hook=prompt zsh)"
+eval "$(zoxide init zsh)"
 
 eval "$(~/.local/bin/mise activate zsh)"
 
