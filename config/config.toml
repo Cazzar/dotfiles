@@ -28,4 +28,5 @@ builtin = "history-watch"
 
 [tools]
 node = "lts"
+npm = "latest"
 
