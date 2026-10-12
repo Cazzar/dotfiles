@@ -1,0 +1,19 @@
+#[bootstrap.mise_shell_activate]
+#zsh = true
+
+[bootstrap.packages]
+"brew:neovim" = "latest"
+
+[bootstrap.macos.finder]
+show_all_files = true
+show_pathbar = true
+
+[bootstrap.repos]
+"~/.dotfiles/nvim" = { url = "git@github.com:Cazzar/nvim.git" }
+
+[dotfiles]
+"~/.config/mise/config.toml" = { mode = "track" }
+"~/.config/nvim" = { mode = "symlink" }
+"~/.ssh/config" = { source = "ssh/config", mode = "copy" }
+"~/.zshrc" = { mode = "symlink" }
+
