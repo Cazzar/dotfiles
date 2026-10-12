@@ -1,4 +1,8 @@
-export ZPLUG_HOME=~/.zplug
+if [[ "$(uname)" == "Darwin" ]]; then
+    export ZPLUG_HOME=$HOMEBREW_PREFIX/opt/zplug
+else
+    export ZPLUG_HOME=~/.zplug
+fi
 source $ZPLUG_HOME/init.zsh
 
 #self manage zplug
