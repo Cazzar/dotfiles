@@ -27,6 +27,7 @@ builtin = "history-watch"
 "~/.zshrc" = { mode = "symlink" }
 
 [tools]
+dotnet = "latest"
 go = "latest"
 node = "lts"
 npm = "latest"
