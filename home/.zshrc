@@ -40,5 +40,10 @@ if ! zplug check --verbose; then
     fi
 fi
 
+# Then, source plugins and add commands to $PATH
+zplug load
+
+eval "$(zoxide init --hook=prompt zsh)"
+
 eval "$(~/.local/bin/mise activate zsh)"
 
