@@ -28,6 +28,7 @@ builtin = "history-watch"
 
 [tools]
 dotnet = "latest"
+ffmpeg = "latest"
 go = "latest"
 node = "lts"
 npm = "latest"
