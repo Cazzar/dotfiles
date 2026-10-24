@@ -47,3 +47,8 @@ eval "$(zoxide init zsh)"
 
 eval "$(~/.local/bin/mise activate zsh)"
 
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/cayde/.lmstudio/bin"
+# End of LM Studio CLI section
+
