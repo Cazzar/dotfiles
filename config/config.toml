@@ -34,5 +34,6 @@ go = "latest"
 node = "lts"
 npm = "latest"
 rust = "latest"
+tmux = "latest"
 yt-dlp = { version = "latest", rename_exe = "yt-dlp" }
 
