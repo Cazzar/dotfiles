@@ -52,3 +52,6 @@ eval "$(~/.local/bin/mise activate zsh)"
 export PATH="$PATH:/Users/cayde/.lmstudio/bin"
 # End of LM Studio CLI section
 
+
+# opencode
+export PATH=/Users/cayde/.opencode/bin:$PATH
